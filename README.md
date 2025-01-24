@@ -77,6 +77,7 @@ Dockerfile erstellen
 
 
 Dockerimage erstellen:
+docker build -t baby-tools-shop .  
 
 
 
