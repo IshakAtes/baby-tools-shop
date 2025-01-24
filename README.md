@@ -41,14 +41,35 @@ This section will cover some hot tips when trying to interacting with this repos
 Schritt-1 repository gecloned
 
 Schritt 2 environtment erstellt und aktiviert mit dem befehl
-create env
-python -m venv env
+Unsere Anwendung läuft bei uns lokal auf dem Rechner, aber es kann sein das es bei jemandem anderen der eine andere python oder
+django version hat nicht läuft. Es kann sein das unser projekt mit einer alten python version nicht so gut läuft. 
+Damit jetzt aber die Anwendung reibungslos auf dem Server läuft, wie bei uns. Packen wir alle unsere installierten anwedungen (python, django, docker etc)
+mit der richtigen version , die bei uns auch funktioniert in eine environment ordner. Diese angegeben anwendungen werden dann mit der zusamm abhängigen version auf dem server installiert, 
+damit es auch auf dem server läuft. Ähnlich wie bei firebase package.json und package-lock.json
 
+virtuelle umgebung erstellen
+python -m venv venv
+
+Aktiviere die virtuelle Umgebung.
 activate environment in vs-code command prompt or cmd (not powershell):
-"env/Scripts/activate"
+"venv/Scripts/activate"
 
-install django
-python -m pip install Django
+überprüfe was alles installiert ist:
+pip freeze
+
+erstelle requirements, damit alle abhängigkeiten später im container installiert werden können:
+pip freeze > requirements.txt
+
+die geclonte Anwendung benötigt Django 4.0.2, deshalb in requirement.txt die version anpassen
+
+Installiere mit pip install -r requirements.txt die Pakete.
+pip install -r requirements.txt
+
+Überprüfe mit pip freeze, ob alles korrekt installiert wurde.
+pip freeze
+
+
+
 
 
 Schritt 3
@@ -57,17 +78,9 @@ Dockerfile erstellen
 
 Dockerimage erstellen:
 
-Unsere Anwendung läuft bei uns lokal auf dem Rechner, aber es kann sein das es bei jemandem anderen der eine andere python oder
-django version hat nicht läuft. Es kann sein das unser projekt mit einer alten python version nicht so gut läuft. 
-Damit jetzt aber die Anwendung reibungslos auf dem Server läuft, wie bei uns. Packen wir alle unsere installierten anwedungen (python, django, docker etc)
-mit der richtigen version , die bei uns auch funktioniert in eine environment ordner. Diese angegeben anwendungen werden dann mit der zusamm abhängigen version auf dem server installiert, 
-damit es auch auf dem server läuft. Ähnlich wie bei firebase package.json und package-lock.json
 
-bash:
-pip freeze
 
-bash:
-pip freeze > requirements.txt
+
 
 
 

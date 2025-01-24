@@ -14,4 +14,4 @@ COPY ./babyshop_app /app
 EXPOSE 8025
 
 # 6. Starte die Anwendung
-CMD ["python manage.py ", "runserver"]
+CMD ["python", "manage.py", "runserver"]
