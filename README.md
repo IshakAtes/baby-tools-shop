@@ -60,14 +60,17 @@ pip freeze
 erstelle requirements, damit alle abhängigkeiten später im container installiert werden können:
 pip freeze > requirements.txt
 
+Schritt 3 Django
 die geclonte Anwendung benötigt Django 4.0.2, deshalb in requirement.txt die version anpassen
 
 Installiere mit pip install -r requirements.txt die Pakete.
 pip install -r requirements.txt
 
+[!Note]
 wenn du eine alte pip version hast, kannst du sie mit diesem befehl updaten:
 pip install --upgrade pip
 
+Schritt 4 pillow
 pillow der requirements hinzufügen
 Pillow==8.3.2
 
@@ -77,7 +80,7 @@ pip install -r requirements.txt
 Überprüfe mit pip freeze, ob alles korrekt installiert wurde.
 pip freeze
 
-
+Schritt 5 in die environtment migrieren
 navigiere zum babyshop_app und führe den migrate befehl aus:
 ``` bash
 (venv) C:\Users\ishak\OneDrive\Desktop\DevSecOps\baby-tools-shop\babyshop_app>python manage.py migrate
@@ -85,23 +88,10 @@ navigiere zum babyshop_app und führe den migrate befehl aus:
 python manage.py migrate
 
 
+Schritt 6  docker image erstellen
 docker image erstellen:
 docker build -t baby-tools-shop .
 
 
-
-
-
-Schritt 3
-Dockerfile erstellen
-
-
-Dockerimage erstellen:
-docker build -t baby-tools-shop .  
-
-
-
-
-
-
-
+Schritt 7 docker run:
+docker build -t baby-tools-shop .
