@@ -65,8 +65,28 @@ die geclonte Anwendung benötigt Django 4.0.2, deshalb in requirement.txt die ve
 Installiere mit pip install -r requirements.txt die Pakete.
 pip install -r requirements.txt
 
+wenn du eine alte pip version hast, kannst du sie mit diesem befehl updaten:
+pip install --upgrade pip
+
+pillow der requirements hinzufügen
+Pillow==8.3.2
+
+nochmal requirements installieren
+pip install -r requirements.txt
+
 Überprüfe mit pip freeze, ob alles korrekt installiert wurde.
 pip freeze
+
+
+navigiere zum babyshop_app und führe den migrate befehl aus:
+``` bash
+(venv) C:\Users\ishak\OneDrive\Desktop\DevSecOps\baby-tools-shop\babyshop_app>python manage.py migrate
+```
+python manage.py migrate
+
+
+docker image erstellen:
+docker build -t baby-tools-shop .
 
 
 
