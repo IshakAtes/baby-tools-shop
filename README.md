@@ -228,9 +228,9 @@ baby-tools-shop/
 ## ⚙️ Configuration
 Key configuration files:
 
-- 'babyshop_app/babyshop/settings.py': Main Django settings
-- 'requirements.txt': Python dependencies
-- 'Dockerfile': Docker configuration
+- `babyshop_app/babyshop/settings.py`: Main Django settings
+- `requirements`.txt: Python dependencies
+- `Dockerfile`: Docker configuration
 
 
 
@@ -240,13 +240,12 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 
 ## 🙏 Acknowledgments
-Django framework community
-Contributors and testers
-Python community
+Django framework community<br>
+Contributors and testers<br>
+Python community<br>
 
 
 
 ## Conclusion
 This project demonstrates a fully functional e-commerce application for Baby Tools Shop. By following the steps outlined, you can successfully run the application both locally and via Docker. The structured setup ensures ease of deployment and compatibility across different environments.
----
 Happy Coding! 🚀
