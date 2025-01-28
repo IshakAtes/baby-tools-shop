@@ -1,97 +1,252 @@
-# E-Commerce Project For Baby Tools
+# Baby Tools E-commerce Project 🛍️
 
-### TECHNOLOGIES
+A comprehensive project showcasing an e-commerce application built with Django, designed for managing and displaying baby tools. This guide walks through the steps for setting up, running, and deploying the project using Docker.  
 
-- Python 3.9
-- Django 4.0.2
-- Venv
+---
 
-### Hints
+## Table of Contents  
 
-This section will cover some hot tips when trying to interacting with this repository:
+1. [Technologies](#technologies-)  
+2. [Hints](#hints)  
+3. [Photos](#photos-️)  
+4. [Setup Instructions](#setup-instructions-)  
+   - [Step 1: Clone the Project](#step-1-clone-the-project)  
+   - [Step 2: Create a Virtual Environment](#step-2-create-a-python-virtual-environment)  
+   - [Step 3: Install Python Dependencies](#step-3-install-python-dependencies)  
+   - [Step 4: Test the Project Locally](#step-4-test-project-locally)  
+   - [Step 5: Create a Dockerfile](#step-5-create-dockerfile)  
+   - [Step 6: Build and Run Docker Image](#step-6-docker-setup-)  
+   - [Step 7: Check the Website](#step-7-check-the-website)  
+5. [Project Structure](#-project-structure)
+5. [Configuration](#️-configuration)
+5. [License](#-license)
+5. [Acknowledgments](#-acknowledgments)  
+5. [Conclusion](#conclusion)  
 
-- Settings & Configuration for Django can be found in `babyshop_app/babyshop/settings.py`
-- Routing: Routing information, such as available routes can be found from any `urls.py` file in `babyshop_app` and corresponding subdirectories
+---
 
-### Photos
+## Technologies 🔧
 
-##### Home Page with login
+- **Python 3.9**  
+- **Django 4.0.2**  
+- **Venv**  
 
-<img alt="" src="https://github.com/MET-DEV/Django-E-Commerce/blob/master/project_images/capture_20220323080815407.jpg"></img>
-##### Home Page with filter
-<img alt="" src="https://github.com/MET-DEV/Django-E-Commerce/blob/master/project_images/capture_20220323080840305.jpg"></img>
-##### Product Detail Page
-<img alt="" src="https://github.com/MET-DEV/Django-E-Commerce/blob/master/project_images/capture_20220323080934541.jpg"></img>
+---
 
-##### Home Page with no login
-<img alt="" src="https://github.com/MET-DEV/Django-E-Commerce/blob/master/project_images/capture_20220323080953570.jpg"></img>
+## Hints  
 
+- **Settings & Configuration**: Found in `babyshop_app/babyshop/settings.py`.  
+- **Routing**: Look for routing information in any `urls.py` file located in `babyshop_app` or its subdirectories.  
 
-##### Register Page
+---
 
-<img alt="" src="https://github.com/MET-DEV/Django-E-Commerce/blob/master/project_images/capture_20220323081016022.jpg"></img>
+## Photos 🖼️ 
 
+### Home Page (Logged In)  
+![Home Page with Login](https://github.com/MET-DEV/Django-E-Commerce/blob/master/project_images/capture_20220323080815407.jpg)  
 
-##### Login Page
+### Home Page (With Filter)  
+![Home Page with Filter](https://github.com/MET-DEV/Django-E-Commerce/blob/master/project_images/capture_20220323080840305.jpg)  
 
-<img alt="" src="https://github.com/MET-DEV/Django-E-Commerce/blob/master/project_images/capture_20220323081044867.jpg"></img>
+### Product Detail Page  
+![Product Detail Page](https://github.com/MET-DEV/Django-E-Commerce/blob/master/project_images/capture_20220323080934541.jpg)  
 
+### Home Page (Without Login)  
+![Home Page Without Login](https://github.com/MET-DEV/Django-E-Commerce/blob/master/project_images/capture_20220323080953570.jpg)  
 
+### Register Page  
+![Register Page](https://github.com/MET-DEV/Django-E-Commerce/blob/master/project_images/capture_20220323081016022.jpg)  
 
-Schritt-1 repository gecloned
+### Login Page  
+![Login Page](https://github.com/MET-DEV/Django-E-Commerce/blob/master/project_images/capture_20220323081044867.jpg)  
 
-Schritt 2 environtment erstellt und aktiviert mit dem befehl
-Unsere Anwendung läuft bei uns lokal auf dem Rechner, aber es kann sein das es bei jemandem anderen der eine andere python oder
-django version hat nicht läuft. Es kann sein das unser projekt mit einer alten python version nicht so gut läuft. 
-Damit jetzt aber die Anwendung reibungslos auf dem Server läuft, wie bei uns. Packen wir alle unsere installierten anwedungen (python, django, docker etc)
-mit der richtigen version , die bei uns auch funktioniert in eine environment ordner. Diese angegeben anwendungen werden dann mit der zusamm abhängigen version auf dem server installiert, 
-damit es auch auf dem server läuft. Ähnlich wie bei firebase package.json und package-lock.json
+---
 
-virtuelle umgebung erstellen
-python -m venv venv
+## Setup Instructions 🚀
 
-Aktiviere die virtuelle Umgebung.
-activate environment in vs-code command prompt or cmd (not powershell):
-"venv/Scripts/activate"
+### Step 1: Clone the Project  
 
-überprüfe was alles installiert ist:
-pip freeze
-
-erstelle requirements, damit alle abhängigkeiten später im container installiert werden können:
-pip freeze > requirements.txt
-
-Schritt 3 Django
-die geclonte Anwendung benötigt Django 4.0.2, deshalb in requirement.txt die version anpassen
-
-Installiere mit pip install -r requirements.txt die Pakete.
-pip install -r requirements.txt
-
-[!Note]
-wenn du eine alte pip version hast, kannst du sie mit diesem befehl updaten:
-pip install --upgrade pip
-
-Schritt 4 pillow
-pillow der requirements hinzufügen
-Pillow==8.3.2
-
-nochmal requirements installieren
-pip install -r requirements.txt
-
-Überprüfe mit pip freeze, ob alles korrekt installiert wurde.
-pip freeze
-
-Schritt 5 in die environtment migrieren
-navigiere zum babyshop_app und führe den migrate befehl aus:
+Open a terminal (PowerShell, CMD or Git Bash) and enter the following command to clone the repository:
 ``` bash
-(venv) C:\Users\ishak\OneDrive\Desktop\DevSecOps\baby-tools-shop\babyshop_app>python manage.py migrate
+git clone https://github.com/IshakAtes/baby-tools-shop.git
 ```
+
+
+
+### Step 2: Create a Python virtual environment
+Our application runs locally on our computer, but it is possible that someone else who has a different python or
+django version does not run. It is possible that our project does not run so well with an old python version. 
+However, to ensure that the application runs smoothly on the server, we pack all dependent applications (python, django, docker etc)
+with the correct version into the virtual environment. These specified applications are then installed on the server with the dependent version, 
+so that it also runs on the server. Similar to firebase package.json and package-lock.json
+
+Create a virtual environment:
+``` bash
+python -m venv venv
+```
+
+Activate the virtual environment:
+``` bash
+"venv/Scripts/activate"
+```
+> [!Note]
+> Note: Use Command Prompt or VS Code's terminal, not PowerShell.
+
+
+
+### Step 3: Install Python Dependencies
+Check installed packages:
+``` bash
+pip freeze
+```
+
+Create a requirements file to store project dependencies:
+``` bash
+pip freeze > requirements.txt
+```
+
+the cloned application requires Django 4.0.2 according to the readme, therefore adjust the version in requirement.txt
+
+Install the packages with pip install -r requirements.txt.
+``` bash
+pip install -r requirements.txt
+```
+
+> [!Note]
+> if you have an old pip version, you can update it with this command:
+> ``` bash
+> pip install --upgrade pip
+> ```
+
+
+> [!Note] According to the error message, pillow is required for the cloned application. Therefore, we should first check which version of pillow is > compatible with our Python and Django version and then add it to 'requirements.txt' and run 'pip install -r requirements.txt' again.
+``` bash
+Django==4.0.2
+Pillow==9.0.0
+```
+
+install requirements again
+``` bash
+pip install -r requirements.txt
+```
+
+Use pip freeze to check whether everything has been installed correctly.
+``` bash
+pip freeze
+```
+
+
+### Step 4 Test project locally
+navigate to babyshop_app and execute the migrate command:
+``` bash
+(venv) C:\Users\user-directory\Desktop\DevSecOps\baby-tools-shop\babyshop_app>
+```
+
+1. Perform database migrations:
+``` bash
 python manage.py migrate
+```
+
+2. Start the local server:
+``` bash
+python manage.py runserver
+```
+
+3. Open your browser and go to:
+``` bash
+http://127.0.0.1:8000
+```
+> [!Note]
+> Note: Check that the page is displayed correctly.
 
 
-Schritt 6  docker image erstellen
-docker image erstellen:
+
+### Step 5: Create Dockerfile
+
+``` bash
+# 1 Start with a base image
+FROM python:3.9-slim
+
+# 2 Set the working directory in the container
+WORKDIR /app
+
+# 3. copy requirements.txt into the Docker image
+COPY requirements.txt /app/
+
+# 4 Install all dependencies
+RUN pip install -r requirements.txt
+
+# 5 Copy the project files into the container
+COPY ./babyshop_app /app
+
+# 6. expose the port on which the application is running
+EXPOSE 8025
+
+# 7. start the application
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8025"]
+```
+> [!Note]
+> The file should be located as a 'Dockerfile' in the main project folder.
+
+
+
+### Step 6: Docker Setup 🐳
+
+1. Open Docker Desktop and let it run in the background. Then return to your vs-code or terminal
+
+2. Build the Docker image:
+``` bash
 docker build -t baby-tools-shop .
+```
+
+3. Launch the container:
+``` bash
+docker run -p 8025:8025 baby-tools-shop
+```
 
 
-Schritt 7 docker run:
-docker build -t baby-tools-shop .
+### Step 7: Check the website
+Open your browser and go to:
+``` bash
+http://localhost:8025
+```
+
+
+## 📁 Project Structure
+``` bash
+baby-tools-shop/
+├── babyshop_app/
+│   ├── babyshop/
+│   │   ├── settings.py
+│   │   └── urls.py
+│   └── manage.py
+├── requirements.txt
+├── Dockerfile
+└── README.md
+```
+
+## ⚙️ Configuration
+Key configuration files:
+
+- 'babyshop_app/babyshop/settings.py': Main Django settings
+- 'requirements.txt': Python dependencies
+- 'Dockerfile': Docker configuration
+
+
+
+## 📝 License
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+
+
+## 🙏 Acknowledgments
+Django framework community
+Contributors and testers
+Python community
+
+
+
+## Conclusion
+This project demonstrates a fully functional e-commerce application for Baby Tools Shop. By following the steps outlined, you can successfully run the application both locally and via Docker. The structured setup ensures ease of deployment and compatibility across different environments.
+---
+Happy Coding! 🚀
