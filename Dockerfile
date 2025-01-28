@@ -4,7 +4,7 @@ FROM python:3.9-slim
 # 2. Setze das Arbeitsverzeichnis im Container
 WORKDIR /app
 
-# 3. Kopiere die requirements.txt in den Container
+# 3. Kopiere requirements.txt in das Docker-Image
 COPY requirements.txt /app/
 
 # 4. Installiere alle Abhängigkeiten
@@ -17,4 +17,4 @@ COPY ./babyshop_app /app
 EXPOSE 8025
 
 # 7. Starte die Anwendung
-CMD ["python", "manage.py", "runserver"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8025"]
