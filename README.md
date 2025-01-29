@@ -277,7 +277,7 @@ Gehe im Browser zu:
 http://127.0.0.1:8000/admin
 Melde dich mit dem gerade erstellten Superuser-Konto an.
 
-### Einige produkte hinzufügen um nach der veröffentlichung keine leere seite zu sehen. Und um zu prüfen ob es auch geklappt hat.
+### Du kannst, nachdem du dich eingeloggt hast, Einige produkte hinzufügen um nach der veröffentlichung keine leere seite zu sehen. Und um zu prüfen ob es auch geklappt hat.
 
 
 <!-- DIESER PART KANN EVENTUELL ÜBERSPRUNGEN WERDEN -->
@@ -303,3 +303,35 @@ http://127.0.0.1:8000
 ```
 > [!Note]
 > Note: Check that the page is displayed correctly.
+
+
+### führe einen push auf git durch
+https://github.com/IshakAtes/baby-tools-shop.git
+
+
+Schritt 1: Zugang zum Server herstellen
+Verbinde dich per SSH mit deinem Server:
+ssh -i ~/.ssh/demo-server iates@49.13.207.228
+
+
+Schritt 2: Git auf dem Server installieren (falls nicht vorhanden)
+sudo apt update  
+sudo apt install git -y
+
+
+Schritt 3: Repository klonen
+Wechsle in das gewünschte Verzeichnis auf dem Server und klone dein Git-Repository:
+
+git clone https://github.com/yourusername/baby-tools-shop.git
+cd baby-tools-shop
+
+
+
+Schritt 4: Docker Build und Run
+Baue und starte deinen Container direkt vom aktuellen Commit:
+docker build -t baby-tools-shop .  
+docker run -d -p 8025:8025 baby-tools-shop
+
+
+Schritt 6: Überprüfung
+Rufe die IP deines Servers im Browser auf:
