@@ -335,3 +335,13 @@ docker run -d -p 8025:8025 baby-tools-shop
 
 Schritt 6: Überprüfung
 Rufe die IP deines Servers im Browser auf:
+
+
+
+schritt 6
+In babyshop_app die settings.py öffnen und bei allowed host das hinzufügen:
+ALLOWED_HOSTS = ['49.13.207.228']
+
+änderungen auf git pushen
+
+und auf dem server pullen
