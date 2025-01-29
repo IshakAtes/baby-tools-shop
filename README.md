@@ -342,6 +342,25 @@ schritt 6
 In babyshop_app die settings.py öffnen und bei allowed host das hinzufügen:
 ALLOWED_HOSTS = ['49.13.207.228']
 
+Django debugmode turn false
+baby-tools-shop -> babyshop_app -> settings.py
+DEBUG = False
+
 änderungen auf git pushen
 
 und auf dem server pullen
+
+requirements installieren. wenn es nicht funktioniert check deine python --version
+python3 --version
+
+sudo apt update
+sudo apt install python3-pip
+
+
+you must be in file baby-tools-shop cd..
+pip3 install -r requirements.txt
+
+
+sudo kill -9 3824021 3824026
+
+docker build -t baby-tools-shop .
