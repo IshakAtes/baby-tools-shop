@@ -249,3 +249,57 @@ Python community<br>
 ## Conclusion
 This project demonstrates a fully functional e-commerce application for Baby Tools Shop. By following the steps outlined, you can successfully run the application both locally and via Docker. The structured setup ensures ease of deployment and compatibility across different environments.<br>
 Happy Coding! 🚀
+
+
+
+Schritt 9 Superuser erstellen
+-activate
+"venv/Scripts/activate"
+
+-navigate to the path in there is the django app
+(venv) C:\Users\ishak\OneDrive\Desktop\DevSecOps\baby-tools-shop\babyshop_app>
+
+-erstelle einen superuser mit dem befehl
+python manage.py createsuperuser
+
+Gib die erforderlichen Informationen ein:
+Benutzername: admin
+E-Mail-Adresse: admin@example.com
+Passwort: ********
+
+
+Starte den Server, um das Admin-Panel zu testen:
+python manage.py runserver
+
+
+Admin-Panel aufrufen:
+Gehe im Browser zu:
+http://127.0.0.1:8000/admin
+Melde dich mit dem gerade erstellten Superuser-Konto an.
+
+### Einige produkte hinzufügen um nach der veröffentlichung keine leere seite zu sehen. Und um zu prüfen ob es auch geklappt hat.
+
+
+<!-- DIESER PART KANN EVENTUELL ÜBERSPRUNGEN WERDEN -->
+### Step 10 Test project locally
+navigate to babyshop_app and execute the migrate command:
+``` bash
+(venv) C:\Users\user-directory\Desktop\DevSecOps\baby-tools-shop\babyshop_app>
+```
+
+1. Perform database migrations:
+``` bash
+python manage.py migrate
+```
+
+2. Start the local server:
+``` bash
+python manage.py runserver
+```
+
+3. Open your browser and go to:
+``` bash
+http://127.0.0.1:8000
+```
+> [!Note]
+> Note: Check that the page is displayed correctly.
