@@ -267,7 +267,7 @@ python manage.py createsuperuser
 
 Gib die erforderlichen Informationen ein:
 Benutzername: admin
-E-Mail-Adresse: admin@example.com
+E-Mail-Adresse: admin@test.com
 Passwort: ********
 
 
@@ -308,6 +308,12 @@ http://127.0.0.1:8000
 > Note: Check that the page is displayed correctly.
 
 
+
+
+schritt 6
+In babyshop_app die settings.py öffnen und bei allowed host das hinzufügen:
+ALLOWED_HOSTS = ['49.13.207.228', '127.0.0.1', 'localhost']
+
 ### führe einen push auf git durch
 https://github.com/IshakAtes/baby-tools-shop.git
 
@@ -330,40 +336,47 @@ cd baby-tools-shop
 
 
 
+
+python3 manage.py migrate
+python3 manage.py runserver 0.0.0.0:8025
+
+
+
+
 Schritt 4: Docker Build und Run
 Baue und starte deinen Container direkt vom aktuellen Commit:
 docker build -t baby-tools-shop .  
+
+[notice] A new release of pip is available: 23.0.1 -> 25.0
+[notice] To update, run: pip install --upgrade pip
+pip install --upgrade pip
+
+
+sudo apt install python3.10-venv
+
+
+apt install python3.10-venv
+
+
+python3 -m venv venv
+
+
+source venv/bin/activate
+
+you must be in file baby-tools-shop cd..
+pip install -r requirements.txt
+
+
+docker build -t baby-tools-shop . 
+
 docker run -d -p 8025:8025 baby-tools-shop
+
+
+
+pip install django-cors-headers
 
 
 Schritt 6: Überprüfung
 Rufe die IP deines Servers im Browser auf:
+http://49.13.207.228:8025/
 
-
-
-schritt 6
-In babyshop_app die settings.py öffnen und bei allowed host das hinzufügen:
-ALLOWED_HOSTS = ['49.13.207.228']
-
-Django debugmode turn false
-baby-tools-shop -> babyshop_app -> settings.py
-DEBUG = False
-
-änderungen auf git pushen
-
-und auf dem server pullen
-
-requirements installieren. wenn es nicht funktioniert check deine python --version
-python3 --version
-
-sudo apt update
-sudo apt install python3-pip
-
-
-you must be in file baby-tools-shop cd..
-pip3 install -r requirements.txt
-
-
-sudo kill -9 3824021 3824026
-
-docker build -t baby-tools-shop .
