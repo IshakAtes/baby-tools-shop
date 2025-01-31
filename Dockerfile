@@ -13,8 +13,11 @@ RUN pip install -r requirements.txt
 # 5. Kopiere die Projektdateien in den Container
 COPY ./babyshop_app /app
 
-# 6. Exponiere den Port, auf dem die Anwendung läuft
+# 6. Sammle die statischen Dateien
+# RUN python manage.py collectstatic --noinput
+
+# 7. Exponiere den Port, auf dem die Anwendung läuft
 EXPOSE 8025
 
-# 7. Starte die Anwendung
+# 8. Starte die Anwendung
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8025"]
