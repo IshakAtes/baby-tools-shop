@@ -215,6 +215,130 @@ http://localhost:8025
 ```
 
 
+
+### Schritt 8: In babyshop_app die settings.py öffnen und bei allowed host das hinzufügen:
+``` python
+ALLOWED_HOSTS = ['49.13.207.228', '127.0.0.1', 'localhost']
+```
+
+
+
+### Schritt 9: Git nochmal aktualisieren bzw. auf den neuesten stand bringen
+``` bash
+git pull
+git add .
+git commit -m "commit_description"
+git push -u origin branch_name
+```
+
+
+### Schritt 10: Zugang zum Server herstellen
+Verbinde dich per SSH mit deinem Server:
+``` bash
+ssh -i ~/.ssh/demo-server iates@49.13.207.228
+```
+
+
+
+### Schritt 10: Git auf dem Server installieren (falls nicht vorhanden)
+```bash
+sudo apt update  
+sudo apt install git -y
+```
+
+
+
+### Schritt 11: Repository klonen
+Wechsle in das gewünschte Verzeichnis auf dem Server und klone dein Git-Repository:
+```bash
+git clone https://github.com/UserName/baby-tools-shop.git
+cd baby-tools-shop
+```
+
+```bash
+cd baby-tools-shop
+```
+
+
+
+### Schritt 12: Paketmanager pip aktualisieren, wenn du 'docker build -t baby-tools-shop .' eingibst und die Meldung '[notice] A new release of pip is available' bekommst, weist dies darauf hin, dass eine neuere pip-Version verfügbar ist.
+``` bash
+pip install --upgrade pip
+```
+> [!Note]
+> Stellt sicher, dass der Paketmanager auf dem neuesten Stand ist, um Kompatibilitätsprobleme zu vermeiden.
+
+
+
+
+### Schritt 13: Install your requirements
+you must be in file baby-tools-shop cd ..
+``` bash
+pip install -r requirements.txt
+```
+
+
+### Schritt 14: Docker-Image erstellen und ausführen
+Erstellt ein Docker-Image mit dem Tag 'baby-tools-shop' basierend auf dem Dockerfile im aktuellen Verzeichnis (.)
+``` bash
+docker build -t baby-tools-shop .
+```
+
+
+
+### Schritt 15: Docker-Container starten
+``` bash
+docker run -d -p 8025:8025 baby-tools-shop
+```
+
+
+
+### Schritt 16: Überprüfung der Anwendung
+Rufe die Server-IP mit Port 8025 im Browser auf:
+http://49.13.207.228:8025/
+
+
+
+### Schritt 17: Create a superuser 'Admin'
+1. Container-ID herausfinden
+``` bash
+docker ps
+```
+
+2. Container-ID herausfinden
+``` bash
+docker exec -it <CONTAINER_ID> /bin/bash
+```
+
+3. Superuser in Django erstellen
+``` bash
+python manage.py createsuperuser
+```
+
+4. Folge den Anweisungen zur Eingabe von Benutzernamen, E-Mail und Passwort.
+``` bash
+Gib die erforderlichen Informationen ein:
+Benutzername: admin
+E-Mail-Adresse: admin@test.com
+Passwort: ********
+Passwort(wiederholung): ********
+```
+
+5. Admin-Panel aufrufen:
+Gehe im Browser zu:
+``` bash
+http://ip_adresse:8025/admin
+```
+> [!Note]
+> Melde dich mit dem gerade erstellten Superuser-Konto an.
+
+
+
+### Schritt 18: Du kannst, nachdem du dich eingeloggt hast, Einige produkte hinzufügen um nach der veröffentlichung keine leere seite zu sehen. Und um zu prüfen ob es auch geklappt hat.
+
+
+
+
 ## 📁 Project Structure
 ``` bash
 baby-tools-shop/
@@ -228,12 +352,18 @@ baby-tools-shop/
 └── README.md
 ```
 
-## ⚙️ Configuration
+## ⚙️ Configuration and important rules
 Key configuration files:
 
 - `babyshop_app/babyshop/settings.py`: Main Django settings
 - `requirements`.txt: Python dependencies
 - `Dockerfile`: Docker configuration
+Wichtige Punkte
+Isolation: Die virtuelle Umgebung (venv) trennt Projektabhängigkeiten vom System-Python.
+
+Dockerisierung: Durch das Docker-Image wird die Anwendung portabel und konsistent auf allen Umgebungen ausführbar.
+
+Port-Konfiguration: Die Angabe 0.0.0.0:8025 und das Docker-Port-Mapping sind entscheidend für externen Zugriff.
 
 
 
@@ -252,131 +382,4 @@ Python community<br>
 ## Conclusion
 This project demonstrates a fully functional e-commerce application for Baby Tools Shop. By following the steps outlined, you can successfully run the application both locally and via Docker. The structured setup ensures ease of deployment and compatibility across different environments.<br>
 Happy Coding! 🚀
-
-
-
-Schritt 9 Superuser erstellen
--activate
-"venv/Scripts/activate"
-
--navigate to the path in there is the django app
-(venv) C:\Users\ishak\OneDrive\Desktop\DevSecOps\baby-tools-shop\babyshop_app>
-
--erstelle einen superuser mit dem befehl
-python manage.py createsuperuser
-
-Gib die erforderlichen Informationen ein:
-Benutzername: admin
-E-Mail-Adresse: admin@test.com
-Passwort: ********
-
-
-Starte den Server, um das Admin-Panel zu testen:
-python manage.py runserver
-
-
-Admin-Panel aufrufen:
-Gehe im Browser zu:
-http://127.0.0.1:8000/admin
-Melde dich mit dem gerade erstellten Superuser-Konto an.
-
-### Du kannst, nachdem du dich eingeloggt hast, Einige produkte hinzufügen um nach der veröffentlichung keine leere seite zu sehen. Und um zu prüfen ob es auch geklappt hat.
-
-
-<!-- DIESER PART KANN EVENTUELL ÜBERSPRUNGEN WERDEN -->
-### Step 10 Test project locally
-navigate to babyshop_app and execute the migrate command:
-``` bash
-(venv) C:\Users\user-directory\Desktop\DevSecOps\baby-tools-shop\babyshop_app>
-```
-
-1. Perform database migrations:
-``` bash
-python manage.py migrate
-```
-
-2. Start the local server:
-``` bash
-python manage.py runserver
-```
-
-3. Open your browser and go to:
-``` bash
-http://127.0.0.1:8000
-```
-> [!Note]
-> Note: Check that the page is displayed correctly.
-
-
-
-
-schritt 6
-In babyshop_app die settings.py öffnen und bei allowed host das hinzufügen:
-ALLOWED_HOSTS = ['49.13.207.228', '127.0.0.1', 'localhost']
-
-### führe einen push auf git durch
-https://github.com/IshakAtes/baby-tools-shop.git
-
-
-Schritt 1: Zugang zum Server herstellen
-Verbinde dich per SSH mit deinem Server:
-ssh -i ~/.ssh/demo-server iates@49.13.207.228
-
-
-Schritt 2: Git auf dem Server installieren (falls nicht vorhanden)
-sudo apt update  
-sudo apt install git -y
-
-
-Schritt 3: Repository klonen
-Wechsle in das gewünschte Verzeichnis auf dem Server und klone dein Git-Repository:
-
-git clone https://github.com/yourusername/baby-tools-shop.git
-cd baby-tools-shop
-
-
-
-
-python3 manage.py migrate
-python3 manage.py runserver 0.0.0.0:8025
-
-
-
-
-Schritt 4: Docker Build und Run
-Baue und starte deinen Container direkt vom aktuellen Commit:
-docker build -t baby-tools-shop .  
-
-[notice] A new release of pip is available: 23.0.1 -> 25.0
-[notice] To update, run: pip install --upgrade pip
-pip install --upgrade pip
-
-
-sudo apt install python3.10-venv
-
-
-apt install python3.10-venv
-
-
-python3 -m venv venv
-
-
-source venv/bin/activate
-
-you must be in file baby-tools-shop cd..
-pip install -r requirements.txt
-
-
-docker build -t baby-tools-shop . 
-
-docker run -d -p 8025:8025 baby-tools-shop
-
-
-
-pip install django-cors-headers
-
-
-Schritt 6: Überprüfung
-Rufe die IP deines Servers im Browser auf:
-http://49.13.207.228:8025/
 
