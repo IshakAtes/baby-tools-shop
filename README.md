@@ -1,6 +1,6 @@
-# Baby Tools E-commerce Project 🛍️
+# Baby Tools E-commerce Project 🛒
 
-A comprehensive project showcasing an e-commerce application built with Django, designed for managing and displaying baby tools. This guide walks through the steps for setting up, running, and deploying the project using Docker.  
+This project demonstrates a fully functional e-commerce application developed with Django to manage and display baby products. Below is a comprehensive guide to setting up, running, and deploying the project using Docker.
 
 ---
 
@@ -30,13 +30,14 @@ A comprehensive project showcasing an e-commerce application built with Django, 
 - **Python 3.9**  
 - **Django 4.0.2**  
 - **Venv**  
+- **Docker**  
 
 ---
 
 ## Hints  
 
 - **Settings & Configuration**: Found in `babyshop_app/babyshop/settings.py`.  
-- **Routing**: Look for routing information in any `urls.py` file located in `babyshop_app` or its subdirectories.  
+- **Routing**: Check 'urls'.py files in 'babyshop' directorie.
 
 ---
 
@@ -216,14 +217,14 @@ http://localhost:8025
 
 
 
-### Schritt 8: In babyshop_app die settings.py öffnen und bei allowed host das hinzufügen:
+### Step 8: Open the settings.py in babyshop_app and add this to allowed host:
 ``` python
 ALLOWED_HOSTS = ['49.13.207.228', '127.0.0.1', 'localhost']
 ```
 
 
 
-### Schritt 9: Git nochmal aktualisieren bzw. auf den neuesten stand bringen
+### Step 9: Update Git again or bring it up to date
 ``` bash
 git pull
 git add .
@@ -232,15 +233,15 @@ git push -u origin branch_name
 ```
 
 
-### Schritt 10: Zugang zum Server herstellen
-Verbinde dich per SSH mit deinem Server:
+### Step 10: Create access to the server
+Connect to your server using SSH:
 ``` bash
 ssh -i ~/.ssh/demo-server iates@49.13.207.228
 ```
 
 
 
-### Schritt 10: Git auf dem Server installieren (falls nicht vorhanden)
+### Step 11: Install Git on the server (if not available)
 ```bash
 sudo apt update  
 sudo apt install git -y
@@ -248,74 +249,72 @@ sudo apt install git -y
 
 
 
-### Schritt 11: Repository klonen
-Wechsle in das gewünschte Verzeichnis auf dem Server und klone dein Git-Repository:
+### Step 12: Clone repository
+Change to the desired directory on the server and clone your Git repository:
 ```bash
 git clone https://github.com/UserName/baby-tools-shop.git
 cd baby-tools-shop
 ```
 
-```bash
+``` bash
 cd baby-tools-shop
 ```
 
+---
 
 
-### Schritt 12: Paketmanager pip aktualisieren, wenn du 'docker build -t baby-tools-shop .' eingibst und die Meldung '[notice] A new release of pip is available' bekommst, weist dies darauf hin, dass eine neuere pip-Version verfügbar ist.
+> [!Note] Update package manager pip, if you enter 'docker build -t baby-tools-shop .' and get the message '[notice] A new release of pip is available', this indicates that a newer pip version is available.
 ``` bash
 pip install --upgrade pip
 ```
-> [!Note]
-> Stellt sicher, dass der Paketmanager auf dem neuesten Stand ist, um Kompatibilitätsprobleme zu vermeiden.
 
 
 
-
-### Schritt 13: Install your requirements
+### Step 13: Install your requirements
 you must be in file baby-tools-shop cd ..
 ``` bash
 pip install -r requirements.txt
 ```
 
 
-### Schritt 14: Docker-Image erstellen und ausführen
-Erstellt ein Docker-Image mit dem Tag 'baby-tools-shop' basierend auf dem Dockerfile im aktuellen Verzeichnis (.)
+### Step 14: Create and run a Docker image
+Creates a Docker image with the tag 'baby-tools-shop' based on the Dockerfile in the current directory (.)
 ``` bash
 docker build -t baby-tools-shop .
 ```
 
 
 
-### Schritt 15: Docker-Container starten
+### Step 15: Start Docker container
 ``` bash
 docker run -d -p 8025:8025 baby-tools-shop
 ```
 
 
 
-### Schritt 16: Überprüfung der Anwendung
-Rufe die Server-IP mit Port 8025 im Browser auf:
+### Step 16: Checking the application
+Call the server IP with port 8025 in the browser:
 http://49.13.207.228:8025/
 
 
 
-### Schritt 17: Create a superuser 'Admin'
-1. Container-ID herausfinden
+### Step 17: Create a superuser 'Admin'
+1. Find out the container ID
 ``` bash
 docker ps
 ```
 
-2. Container-ID herausfinden
+2. This command allows you to start an interactive Bash session inside a running Docker container. Replace <CONTAINER_ID> with the actual container ID or name.
 ``` bash
 docker exec -it <CONTAINER_ID> /bin/bash
 ```
 
-3. Superuser in Django erstellen
+3. Create superuser in Django
 ``` bash
 python manage.py createsuperuser
 ```
 
-4. Folge den Anweisungen zur Eingabe von Benutzernamen, E-Mail und Passwort.
+4. Follow the instructions to enter your user name, e-mail and password.
 ``` bash
 Gib die erforderlichen Informationen ein:
 Benutzername: admin
@@ -324,17 +323,16 @@ Passwort: ********
 Passwort(wiederholung): ********
 ```
 
-5. Admin-Panel aufrufen:
-Gehe im Browser zu:
+5. Call up the admin panel:
 ``` bash
 http://ip_adresse:8025/admin
 ```
 > [!Note]
-> Melde dich mit dem gerade erstellten Superuser-Konto an.
+> Log in with the superuser account you just created.
 
 
 
-### Schritt 18: Du kannst, nachdem du dich eingeloggt hast, Einige produkte hinzufügen um nach der veröffentlichung keine leere seite zu sehen. Und um zu prüfen ob es auch geklappt hat.
+### Step 18: After you have logged in, you can add some products to avoid seeing a blank page after publication. And to check if it worked.
 
 
 
@@ -353,17 +351,19 @@ baby-tools-shop/
 ```
 
 ## ⚙️ Configuration and important rules
-Key configuration files:
+#### Key configuration files:
 
 - `babyshop_app/babyshop/settings.py`: Main Django settings
 - `requirements`.txt: Python dependencies
 - `Dockerfile`: Docker configuration
-Wichtige Punkte
-Isolation: Die virtuelle Umgebung (venv) trennt Projektabhängigkeiten vom System-Python.
 
-Dockerisierung: Durch das Docker-Image wird die Anwendung portabel und konsistent auf allen Umgebungen ausführbar.
+#### Important Points
 
-Port-Konfiguration: Die Angabe 0.0.0.0:8025 und das Docker-Port-Mapping sind entscheidend für externen Zugriff.
+- <strong>Isolation:</strong> The virtual environment ('venv') separates project dependencies from the system Python.
+
+- <strong>Containerization</strong>: The Docker image makes the application portable and consistent across all environments.
+
+- <strong>Port Configuration:</strong> The specification '0.0.0.0:8025' and Docker port mapping are crucial for external access.
 
 
 
@@ -373,13 +373,12 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 
 ## 🙏 Acknowledgments
-Django framework community<br>
-Contributors and testers<br>
-Python community<br>
+- Django framework community<br>
+- Contributors and testers<br>
+- Python community<br>
 
 
 
 ## Conclusion
 This project demonstrates a fully functional e-commerce application for Baby Tools Shop. By following the steps outlined, you can successfully run the application both locally and via Docker. The structured setup ensures ease of deployment and compatibility across different environments.<br>
 Happy Coding! 🚀
-
