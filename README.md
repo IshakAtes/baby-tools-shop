@@ -2,6 +2,8 @@
 
 This project demonstrates a fully functional e-commerce application developed with Django to manage and display baby products. Below is a comprehensive guide to setting up, running, and deploying the project using Docker.
 
+[Checklist](/baby-tools-shop/Checkliste_Baby_Tools_Shop.pdf)
+
 ---
 
 ## Quickstart ⚡️
