@@ -2,7 +2,7 @@
 
 This project demonstrates a fully functional e-commerce application developed with Django to manage and display baby products. Below is a comprehensive guide to setting up, running, and deploying the project using Docker.
 
-[Checklist](/baby-tools-shop/Checkliste_Baby_Tools_Shop.pdf)
+[Show Checklist](https://github.com/IshakAtes/baby-tools-shop/blob/e5058f5378bc5a7544a49b7fb9bde3c15625a7dd/Checkliste_Baby_Tools_Shop.pdf)
 
 ---
 
@@ -135,7 +135,7 @@ CMD ["python", "manage.py", "runserver", "0.0.0.0:8025"]
 
 ### Step 2: Open the settings.py in babyshop_app and add this to allowed host:
 ``` python
-ALLOWED_HOSTS = ['ip-adress', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['<ip-adress>', '127.0.0.1', 'localhost']
 ```
 
 
@@ -192,6 +192,9 @@ pip install -r requirements.txt
 
 ### Step 8: Create and run a Docker image 🐳
 Creates a Docker image with the tag `baby-tools-shop` based on the Dockerfile in the current directory (.)
+- docker build: The command to create (build) a Docker image.
+- -t baby-tools-shop: Specifies the name (baby-tools-shop) and optionally a tag (version number) for the image. The -t stands for “tag”.
+- . (dot): Specifies the current directory as the context for the build process. Docker searches this directory for a file called Dockerfile, which contains instructions for creating the image.
 ``` bash
 docker build -t baby-tools-shop .
 ```
@@ -199,6 +202,11 @@ docker build -t baby-tools-shop .
 
 
 ### Step 9: Start Docker container 🐳
+The command docker run -d -p 8025:8025 baby-tools-shop is used to start a Docker container. Here's a breakdown of each part:
+- docker run: Starts a new container based on a Docker image.
+- -d: Runs the container in detached mode (in the background), so the terminal remains available.
+- -p 8025:8025: Maps port 8025 on the host machine to port 8025 inside the container, making the service accessible via http://localhost:8025.
+- baby-tools-shop: The name of the Docker image used to create the container.
 ``` bash
 docker run -d -p 8025:8025 baby-tools-shop
 ```
