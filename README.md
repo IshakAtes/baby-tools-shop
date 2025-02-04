@@ -4,30 +4,52 @@ This project demonstrates a fully functional e-commerce application developed wi
 
 ---
 
+## Quickstart ⚡️
+If you're in a hurry to see the project live, follow these minimal steps:
+1. Clone the repository:
+``` bash
+git clone https://github.com/UserName/baby-tools-shop.git
+cd baby-tools-shop #go to directory
+```
+
+2. Build and run the Docker container:
+``` bash
+docker build -t baby-tools-shop .
+docker run -d -p 8025:8025 baby-tools-shop
+```
+
+3. Access the application:
+Visit `http://localhost:8025` in your browser.
+
+4. Create a Django Admin User (Optional):
+``` bash
+docker exec -it <CONTAINER_ID> /bin/bash
+python manage.py createsuperuser
+```
+
+#### That's it! 🎉 The project is now up and running.
+
+---
+
 ## Table of Contents  
 
-1. [Technologies](#technologies-)  
-2. [Hints](#hints)  
-3. [Photos](#photos-️)  
-4. [Setup Instructions](#setup-instructions-)  
-   - [Step 1: Clone the Project](#step-1-clone-the-project)  
-   - [Step 2: Create a Virtual Environment](#step-2-create-a-python-virtual-environment)  
-   - [Step 3: Install Python Dependencies](#step-3-install-python-dependencies)  
-   - [Step 4: Test the Project Locally](#step-4-test-project-locally)  
-   - [Step 5: Create a Dockerfile](#step-5-create-dockerfile)  
-   - [Step 6: Docker Setup](#step-6-docker-setup-)  
-   - [Step 7: Check the Website](#step-7-check-the-website)  
-   - [Step 8: Update Django Allowed Hosts](#step-8-open-the-settingspy-in-babyshop_app-and-add-this-to-allowed-host)  
-   - [Step 9: Update Git Repository](#step-9-update-git-again-or-bring-it-up-to-date)  
-   - [Step 10: Create Server Access](#step-10-create-access-to-the-server)  
-   - [Step 11: Install Git on the Server](#step-11-install-git-on-the-server-if-not-available)  
-   - [Step 12: Clone Repository on Server](#step-12-clone-repository)  
-   - [Step 13: Install Requirements](#step-13-install-your-requirements)  
-   - [Step 14: Create Docker Image](#step-14-create-and-run-a-docker-image)  
-   - [Step 15: Start Docker Container](#step-15-start-docker-container)  
-   - [Step 16: Test Application](#step-16-checking-the-application)  
-   - [Step 17: Create Django Admin User](#step-17-create-a-superuser-admin)  
-   - [Step 18: Add Products](#step-18-after-you-have-logged-in-you-can-add-some-products-to-avoid-seeing-a-blank-page-after-publication-and-to-check-if-it-worked)  
+1. [Quickstart](#quickstart-️)
+2. [Technologies](#technologies-)  
+3. [Hints](#hints)  
+4. [Photos](#photos-️)  
+5. [Setup Instructions](#setup-instructions-)  
+   - [Step 1: Create Dockerfile](#step-1-create-dockerfile-)  
+   - [Step 2: Update Django Allowed Hosts](#step-2-open-the-settingspy-in-babyshop_app-and-add-this-to-allowed-host)  
+   - [Step 3: Update Git Repository](#step-3-update-git-again-or-bring-it-up-to-date)  
+   - [Step 4: Connect with the Server](#step-4-connect-with-the-server)  
+   - [Step 5: Install Git on the Server](#step-5-install-git-on-the-server-if-not-available)  
+   - [Step 6: Clone Repository on Server](#step-6-clone-repository)  
+   - [Step 7: Install Requirements](#step-7-install-your-requirements)  
+   - [Step 8: Create Docker Image](#step-8-create-and-run-a-docker-image-)  
+   - [Step 9: Start Docker Container](#step-9-start-docker-container-)  
+   - [Step 10: Test Application](#step-10-checking-the-application)  
+   - [Step 11: Create Django Admin User](#step-11-create-a-superuser-admin)  
+   - [Step 12: Add Products](#step-12-after-you-have-logged-in-you-can-add-some-products-to-avoid-seeing-a-blank-page-after-publication-and-to-check-if-it-worked)   
 5. [Project Structure](#-project-structure)  
 6. [Configuration and Important Rules](#️-configuration-and-important-rules)  
 7. [License](#-license)  
@@ -77,104 +99,7 @@ This project demonstrates a fully functional e-commerce application developed wi
 
 ## Setup Instructions 🚀
 
-### Step 1: Clone the Project  
-
-Open a terminal (`PowerShell`, `CMD` or `Git` Bash) and enter the following command to clone the repository:
-``` bash
-git clone https://github.com/IshakAtes/baby-tools-shop.git
-```
-
-
-
-### Step 2: Create a Python virtual environment
-Our application runs locally on our computer, but it is possible that someone else who has a different python or
-django version does not run. It is possible that our project does not run so well with an old python version. 
-However, to ensure that the application runs smoothly on the server, we pack all dependent applications (python, django, docker etc)
-with the correct version into the virtual environment. These specified applications are then installed on the server with the dependent version, 
-so that it also runs on the server. Similar to firebase package.json and package-lock.json
-
-Create a virtual environment:
-``` bash
-python -m venv venv
-```
-
-Activate the virtual environment:
-``` bash
-"venv/Scripts/activate"
-```
-> [!Note]
-> Note: Use Command Prompt or VS Code's terminal, not PowerShell.
-
-
-
-### Step 3: Install Python Dependencies
-Check installed packages:
-``` bash
-pip freeze
-```
-
-Create a requirements file to store project dependencies:
-``` bash
-pip freeze > requirements.txt
-```
-
-the cloned application requires `Django 4.0.2` according to the readme, therefore adjust the version in requirement.txt
-
-Install the packages with pip install -r requirements.txt.
-``` bash
-pip install -r requirements.txt
-```
-
-> [!Note]
-> if you have an old pip version, you can update it with this command:
-> ``` bash
-> pip install --upgrade pip
-> ```
-
-
-> [!Note] According to the error message, `pillow` is required for the cloned application. Therefore, we should first check which version of pillow is compatible with our Python and Django version and then add it to `requirements.txt` and run `pip install -r requirements.txt` again.
-``` bash
-Django==4.0.2
-Pillow==9.0.0
-```
-
-install requirements again
-``` bash
-pip install -r requirements.txt
-```
-
-Use `pip freeze` to check whether everything has been installed correctly.
-``` bash
-pip freeze
-```
-
-
-### Step 4 Test project locally
-navigate to `babyshop_app` and execute the migrate command:
-``` bash
-(venv) C:\Users\user-directory\Desktop\DevSecOps\baby-tools-shop\babyshop_app>
-```
-
-1. Perform database migrations:
-``` bash
-python manage.py migrate
-```
-
-2. Start the local server:
-``` bash
-python manage.py runserver
-```
-
-3. Open your browser and go to:
-``` bash
-http://127.0.0.1:8000
-```
-> [!Note]
-> Note: Check that the page is displayed correctly.
-
-
-
-### Step 5: Create Dockerfile
+### Step 1: Create Dockerfile 🐳
 
 ``` bash
 # 1 Start with a base image
@@ -206,37 +131,13 @@ CMD ["python", "manage.py", "runserver", "0.0.0.0:8025"]
 
 
 
-### Step 6: Docker Setup 🐳
-
-1. Open Docker Desktop and let it run in the background. Then return to your vs-code or terminal
-
-2. Build the Docker image:
-``` bash
-docker build -t baby-tools-shop .
-```
-
-3. Launch the container:
-``` bash
-docker run -p 8025:8025 baby-tools-shop
-```
-
-
-### Step 7: Check the website
-Open your browser and go to:
-``` bash
-http://localhost:8025
-```
-
-
-
-### Step 8: Open the settings.py in babyshop_app and add this to allowed host:
+### Step 2: Open the settings.py in babyshop_app and add this to allowed host:
 ``` python
-ALLOWED_HOSTS = ['49.13.207.228', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['ip-adress', '127.0.0.1', 'localhost']
 ```
 
 
-
-### Step 9: Update Git again or bring it up to date
+### Step 3: Update Git again or bring it up to date
 ``` bash
 git pull
 git add .
@@ -245,23 +146,21 @@ git push -u origin branch_name
 ```
 
 
-### Step 10: Create access to the server
+### Step 4: Connect with the server
 Connect to your server using `SSH`:
 ``` bash
-ssh -i ~/.ssh/demo-server iates@49.13.207.228
+ssh -i ~/.ssh/ssh-key username@ip-adress
 ```
 
 
-
-### Step 11: Install Git on the server (if not available)
+### Step 5: Install Git on the server (if not available)
 ```bash
 sudo apt update  
 sudo apt install git -y
 ```
 
 
-
-### Step 12: Clone repository
+### Step 6: Clone repository
 Change to the desired directory on the server and clone your Git repository:
 ```bash
 git clone https://github.com/UserName/baby-tools-shop.git
@@ -282,14 +181,14 @@ pip install --upgrade pip
 
 
 
-### Step 13: Install your requirements
+### Step 7: Install your requirements
 you must be in file baby-tools-shop cd ..
 ``` bash
 pip install -r requirements.txt
 ```
 
 
-### Step 14: Create and run a Docker image
+### Step 8: Create and run a Docker image 🐳
 Creates a Docker image with the tag `baby-tools-shop` based on the Dockerfile in the current directory (.)
 ``` bash
 docker build -t baby-tools-shop .
@@ -297,14 +196,14 @@ docker build -t baby-tools-shop .
 
 
 
-### Step 15: Start Docker container
+### Step 9: Start Docker container 🐳
 ``` bash
 docker run -d -p 8025:8025 baby-tools-shop
 ```
 
 
 
-### Step 16: Checking the application
+### Step 10: Checking the application
 Call the server `IP` with port `8025` in the browser:
 ``` bash
 http://<ip_adress>:8025/
@@ -312,7 +211,7 @@ http://<ip_adress>:8025/
 
 
 
-### Step 17: Create a superuser 'Admin'
+### Step 11: Create a superuser 'Admin'
 1. Find out the container ID
 ``` bash
 docker ps
@@ -330,23 +229,23 @@ python manage.py createsuperuser
 
 4. Follow the instructions to enter your user `name`, `e-mail` and `password`.
 ``` bash
-Gib die erforderlichen Informationen ein:
+Enter the required information:
 Benutzername: admin
 E-Mail-Adresse: admin@test.com
 Passwort: ********
-Passwort(wiederholung): ********
+Passwort (again): ********
 ```
 
 5. Call up the admin panel:
 ``` bash
-http://ip_adresse:8025/admin
+http://ip_adress:8025/admin
 ```
 > [!Note]
 > Log in with the superuser account you just created.
 
 
 
-### Step 18: After you have logged in, you can add some products to avoid seeing a blank page after publication. And to check if it worked.
+### Step 12: After you have logged in, you can add some products to avoid seeing a blank page after publication. And to check if it worked.
 
 
 
@@ -373,16 +272,16 @@ baby-tools-shop/
 
 #### Important Points
 
-- <strong>Isolation:</strong> The virtual environment (`venv`) separates project dependencies from the system Python.
+- **Isolation:** The virtual environment (`venv`) separates project dependencies from the system Python.
 
-- <strong>Containerization</strong>: The Docker image makes the application portable and consistent across all environments.
+- **Containerization**: The Docker image makes the application portable and consistent across all environments.
 
-- <strong>Port Configuration:</strong> The specification `0.0.0.0:8025` and Docker port mapping are crucial for external access.
+- **Port Configuration:** The specification `0.0.0.0:8025` and Docker port mapping are crucial for external access.
 
 
 
 ## 📝 License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](/baby-tools-shop/LICENSE) file for details.
 
 
 
