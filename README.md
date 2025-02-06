@@ -173,21 +173,6 @@ cd baby-tools-shop
 cd baby-tools-shop
 ```
 
----
-
-
-> [!Note] Update package manager `pip`, if you enter `docker build -t baby-tools-shop .` and get the message `[notice] A new release of pip is available`, this indicates that a newer `pip` version is available.
-``` bash
-pip install --upgrade pip
-```
-
-
-
-### Step 7: Install your requirements
-you must be in file baby-tools-shop cd ..
-``` bash
-pip install -r requirements.txt
-```
 
 
 ### Step 8: Create and run a Docker image 🐳
@@ -305,3 +290,16 @@ This project is licensed under the MIT License - see the [LICENSE](/baby-tools-s
 ## Conclusion
 This project demonstrates a fully functional e-commerce application for Baby Tools Shop. By following the steps outlined, you can successfully run the application both locally and via Docker. The structured setup ensures ease of deployment and compatibility across different environments.<br>
 Happy Coding! 🚀
+
+
+
+## settings.py
+import os
+
+ALLOWED_HOSTS = [os.getenv("SERVER_IP", "127.0.0.1"), 'localhost']
+
+
+create .env file
+SERVER_IP=49.13.207.228
+
+

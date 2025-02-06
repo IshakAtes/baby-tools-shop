@@ -7,11 +7,11 @@ WORKDIR /app
 # 3. Kopiere requirements.txt in das Docker-Image
 COPY requirements.txt /app/
 
-# 4. Installiere alle Abhängigkeiten
-RUN pip install -r requirements.txt
-
-# 5. Kopiere die Projektdateien in den Container
+# 4. Kopiere die Projektdateien in den Container
 COPY ./babyshop_app /app
+
+# 5. Installiere alle Abhängigkeiten
+RUN pip install -r requirements.txt
 
 # 6. Sammle die statischen Dateien
 # RUN python manage.py collectstatic --noinput
