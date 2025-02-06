@@ -28,7 +28,7 @@ DEBUG = True
 
 import os
 
-ALLOWED_HOSTS = [os.getenv("SERVER_IP"), 'localhost']
+ALLOWED_HOSTS = [os.getenv("SERVER_IP", 'localhost')]
 
 
 
