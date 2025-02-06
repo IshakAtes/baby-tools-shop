@@ -21,5 +21,8 @@ RUN pip install -r requirements.txt
 # 7. Exponiere den Port, auf dem die Anwendung läuft
 EXPOSE 8025
 
+# Variable mit der ip
+ENV SERVER_IP=localhost
+
 # 8. Starte die Anwendung
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8025"]
