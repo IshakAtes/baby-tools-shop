@@ -27,6 +27,10 @@ SECRET_KEY = 'django-insecure-7j(@z8g0qc0hsl3wiqp55_ult3k3g&lh17@643@*g_q=sikrxr
 DEBUG = True
 
 import os
+from dotenv import load_dotenv
+load_dotenv() 
+
+# BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 ALLOWED_HOSTS = [os.getenv("SERVER_IP", 'localhost')]
 
