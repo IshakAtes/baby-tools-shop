@@ -14,16 +14,21 @@ git clone https://github.com/UserName/baby-tools-shop.git
 cd baby-tools-shop #go to directory
 ```
 
-2. Build and run the Docker container:
+2. Create the .env file:
 ``` bash
-docker build -t baby-tools-shop .
-docker run -d -p 8025:8025 baby-tools-shop
+echo "SERVER_IP=<SECRET_IP_ADRESS>" > .env
 ```
 
-3. Access the application:
+3. Build and run the Docker container:
+``` bash
+docker build -t baby-tools-shop .
+docker run -d --env-file .env -p 8025:8025 baby-tools-shop
+```
+
+4. Access the application:
 Visit `http://localhost:8025` in your browser.
 
-4. Create a Django Admin User (Optional):
+5. Create a Django Admin User (Optional):
 ``` bash
 docker exec -it <CONTAINER_ID> /bin/bash
 python manage.py createsuperuser
@@ -45,7 +50,7 @@ python manage.py createsuperuser
    - [Step 3: Connect with the Server](#step-3-connect-with-the-server)  
    - [Step 4: Install Git on the Server](#step-4-install-git-on-the-server-if-not-available)  
    - [Step 5: Clone Repository on Server](#step-5-clone-repository)  
-   - [Step 6: Create the .env File](#step-6-this-command-creates-a-env-file-and-writes-the-server_ip-environment-variable-with-the-value-secret_ip_adress-this-file-is-used-to-store-configuration-values-securely-outside-the-source-code)  
+   - [Step 6: Create the .env File](#step-6-this-command-creates-a-env-file-and-writes-the-server_ip-environment-variable-with-the-value-secret_ip_adress-this-file-is-used-to-store-configuration-values-securely-outside-the-source-code-here-is-an-example)  
    - [Step 7: Create Docker Image](#step-7-create-and-run-a-docker-image-)  
    - [Step 8: Start Docker Container](#step-8-start-docker-container-)  
    - [Step 9: Test Application](#step-9-checking-the-application)  
