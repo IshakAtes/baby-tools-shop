@@ -172,7 +172,7 @@ cd baby-tools-shop
 ```
 
 
-### Step 6: This command creates a `.env` file and writes the `SERVER_IP` environment variable with the value `<SECRET_IP_ADRESS`. This file is used to store configuration values securely outside the source code.
+### Step 6: This command creates a `.env` file and writes the `SERVER_IP` environment variable with the value `<SECRET_IP_ADRESS`. This file is used to store configuration values securely outside the source code. Here is an [example](https://github.com/IshakAtes/baby-tools-shop/blob/main/.envExample)
 ``` bash
 echo "SERVER_IP=<SECRET_IP_ADRESS>" > .env
 ```
