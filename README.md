@@ -104,7 +104,7 @@ python manage.py createsuperuser
 ## Setup Instructions 🚀
 
 ### Step 1: Create Dockerfile 🐳
-show [Dockerfile] (https://github.com/IshakAtes/baby-tools-shop/blob/7e2e0370d1456132cedf13a06e51c80541740dc0/Dockerfile)
+show [Dockerfile](https://github.com/IshakAtes/baby-tools-shop/blob/7e2e0370d1456132cedf13a06e51c80541740dc0/Dockerfile)
 
 
 
