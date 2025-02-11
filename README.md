@@ -46,15 +46,14 @@ python manage.py createsuperuser
 4. [Photos](#photos-️)  
 5. [Setup Instructions](#setup-instructions-)  
    - [Step 1: Create Dockerfile](#step-1-create-dockerfile-)  
-   - [Step 2: Configure Django Allowed Hosts](#step-2-open-the-settingspy-in-babyshop_app-and-add-this-to-allowed-host)  
-   - [Step 3: Install Git on the Server](#step-3-install-git-on-the-server-if-not-available)  
-   - [Step 4: Clone Repository on Server](#step-4-clone-repository)  
-   - [Step 5: Create the .env File](#step-6-create-and-run-a-docker-image-)  
-   - [Step 6: Create Docker Image](#step-6-create-and-run-a-docker-image-)  
-   - [Step 7: Start Docker Container](#step-7-start-docker-container-)  
-   - [Step 8: Test Application](#step-8-checking-the-application)  
-   - [Step 9: Create Django Admin User](#step-9-create-a-superuser-admin)  
-   - [Step 10: Add Products](#step-10-after-you-have-logged-in-you-can-add-some-products-to-avoid-seeing-a-blank-page-after-publication-and-to-check-if-it-worked)   
+   - [Step 2: Configure Django Allowed Hosts](#step-2-open-the-settingspy-in-babyshop_app-and-add-this-to-allowed-host)
+   - [Step 3: Clone Repository on Server](#step-3-clone-repository)  
+   - [Step 4: Create the .env File](#step-4-this-command-creates-a-env-file-and-writes-the-server_ip-environment-variable-with-the-value-secret_ip_adress-this-file-is-used-to-store-configuration-values-securely-outside-the-source-code-here-is-an-example)  
+   - [Step 5: Create Docker Image](#step-5-create-and-run-a-docker-image-)  
+   - [Step 6: Start Docker Container](#step-6-start-docker-container-)  
+   - [Step 7: Test Application](#step-7-checking-the-application)  
+   - [Step 8: Create Django Admin User](#step-8-create-a-superuser-admin)  
+   - [Step 9: Add Products](#step-9-after-you-have-logged-in-you-can-add-some-products-to-avoid-seeing-a-blank-page-after-publication-and-to-check-if-it-worked)   
 5. [Project Structure](#-project-structure)  
 6. [Configuration and Important Rules](#️-configuration-and-important-rules)  
 7. [License](#-license)  
@@ -105,36 +104,7 @@ python manage.py createsuperuser
 ## Setup Instructions 🚀
 
 ### Step 1: Create Dockerfile 🐳
-
-``` bash
-# 1. Starte mit einem Base-Image
-FROM python:3.9-slim
-
-# 2. Setze das Arbeitsverzeichnis im Container
-WORKDIR /app
-
-# 3. Kopiere notwendige Projektdateien und Abhängigkeiten in den Container
-COPY requirements.txt /app/
-COPY ./babyshop_app /app
-
-# 4. Installiere python-dotenv, um .env-Dateien zu laden (falls du es benötigst)
-RUN pip install python-dotenv
-
-# 5. Installiere alle Abhängigkeiten
-RUN pip install -r requirements.txt
-
-# 6. Sammle die statischen Dateien
-# RUN python manage.py collectstatic --noinput
-
-# 7. Exponiere den Port, auf dem die Anwendung läuft
-EXPOSE 8025
-
-# Variable mit der ip
-ENV SERVER_IP=localhost
-
-# 8. Starte die Anwendung
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8025"]
-```
+show [Dockerfile] (https://github.com/IshakAtes/baby-tools-shop/blob/7e2e0370d1456132cedf13a06e51c80541740dc0/Dockerfile)
 
 
 
@@ -148,14 +118,7 @@ ALLOWED_HOSTS = [os.getenv("SERVER_IP", 'localhost')]
 ```
 
 
-### Step 3: Install Git on the server (if not available)
-```bash
-sudo apt update  
-sudo apt install git -y
-```
-
-
-### Step 4: Clone repository
+### Step 3: Clone repository
 Change to the desired directory on the server and clone your Git repository:
 ```bash
 git clone https://github.com/UserName/baby-tools-shop.git
@@ -167,14 +130,14 @@ cd baby-tools-shop
 ```
 
 
-### Step 5: This command creates a `.env` file and writes the `SERVER_IP` environment variable with the value `<SECRET_IP_ADRESS`. This file is used to store configuration values securely outside the source code. Here is an [example](https://github.com/IshakAtes/baby-tools-shop/blob/main/.envExample)
+### Step 4: This command creates a `.env` file and writes the `SERVER_IP` environment variable with the value `<SECRET_IP_ADRESS`. This file is used to store configuration values securely outside the source code. Here is an [example](https://github.com/IshakAtes/baby-tools-shop/blob/main/.envExample)
 ``` bash
 echo "SERVER_IP=<SECRET_IP_ADRESS>" > .env
 ```
 
 
 
-### Step 6: Create and run a Docker image 🐳
+### Step 5: Create and run a Docker image 🐳
 Creates a Docker image with the tag `baby-tools-shop` based on the Dockerfile in the current directory (.)
 - docker build: The command to create (build) a Docker image.
 - -t baby-tools-shop: Specifies the name (baby-tools-shop) and optionally a tag (version number) for the image. The -t stands for “tag”.
@@ -185,7 +148,7 @@ docker build -t baby-tools-shop .
 
 
 
-### Step 7: Start Docker container 🐳
+### Step 6: Start Docker container 🐳
 The command docker run -d --env-file .env -p 8025:8025 baby-tools-shop is used to start a Docker container. Here's a breakdown of each part:
 - `docker run`: Starts a new container based on a Docker image.
 - `-d`: Runs the container in detached mode (in the background), so your terminal stays free.
@@ -198,7 +161,7 @@ docker run -d --env-file .env -p 8025:8025 baby-tools-shop
 
 
 
-### Step 8: Checking the application
+### Step 7: Checking the application
 Call the server `IP` with port `8025` in the browser:
 ``` bash
 http://<ip_adress>:8025/
@@ -206,7 +169,7 @@ http://<ip_adress>:8025/
 
 
 
-### Step 9: Create a superuser 'Admin'
+### Step 8: Create a superuser 'Admin'
 1. Find out the container ID
 ``` bash
 docker ps
@@ -241,7 +204,7 @@ http://ip_adress:8025/admin
 
 
 
-### Step 10: After you have logged in, you can add some products to avoid seeing a blank page after publication. And to check if it worked.
+### Step 9: After you have logged in, you can add some products to avoid seeing a blank page after publication. And to check if it worked.
 
 
 
