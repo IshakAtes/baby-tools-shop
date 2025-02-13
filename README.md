@@ -44,7 +44,7 @@ python manage.py createsuperuser
 2. [Technologies](#technologies-)  
 3. [Hints](#hints)  
 4. [Photos](#photos-️)  
-5. [Setup Instructions](#setup-instructions-)  
+5. [Usage](#usage-section-)  
    - [Step 1: Create Dockerfile](#step-1-create-dockerfile-)  
    - [Step 2: Configure Django Allowed Hosts](#step-2-open-the-settingspy-in-babyshop_app-and-add-this-to-allowed-host)
    - [Step 3: Clone Repository on Server](#step-3-clone-repository)  
@@ -101,7 +101,7 @@ python manage.py createsuperuser
 
 ---
 
-## Setup Instructions 🚀
+## Usage Section 🚀
 
 ### Step 1: Create Dockerfile 🐳
 show [Dockerfile](https://github.com/IshakAtes/baby-tools-shop/blob/7e2e0370d1456132cedf13a06e51c80541740dc0/Dockerfile)
@@ -125,10 +125,6 @@ git clone https://github.com/UserName/baby-tools-shop.git
 cd baby-tools-shop
 ```
 
-``` bash
-cd baby-tools-shop
-```
-
 
 ### Step 4: This command creates a `.env` file and writes the `SERVER_IP` environment variable with the value `<SECRET_IP_ADRESS`. This file is used to store configuration values securely outside the source code. Here is an [example](https://github.com/IshakAtes/baby-tools-shop/blob/main/.envExample)
 ``` bash
@@ -149,14 +145,19 @@ docker build -t baby-tools-shop .
 
 
 ### Step 6: Start Docker container 🐳
-The command docker run -d --env-file .env -p 8025:8025 baby-tools-shop is used to start a Docker container. Here's a breakdown of each part:
+The command `docker run -d --env-file .env -p 8025:8025 --restart=always baby-tools-shop` is used to start a Docker container. Here's a breakdown of each part:
 - `docker run`: Starts a new container based on a Docker image.
 - `-d`: Runs the container in detached mode (in the background), so your terminal stays free.
 - `--env-file .env`: Loads environment variables from the `.env` file into the container.
 - `-p 8025:8025`: Maps port 8025 on your machine to port 8025 inside the container, making the service available at `http://localhost:8025`.
+- `--restart=always`: Ensures that the container automatically restarts in the following cases:
+  - If the container crashes, it is restarted immediately.
+  - If the Docker service restarts, the container is started again.
+  - If the server/machine reboots, the container starts automatically with the system.
+  - **Exception:** If the container is manually stopped using `docker stop <container-id>`, it will not restart until manually started again.
 - `baby-tools-shop`: The name of the Docker image used to create the container.
 ``` bash
-docker run -d --env-file .env -p 8025:8025 baby-tools-shop
+docker run -d --env-file .env -p 8025:8025 --restart=always baby-tools-shop
 ```
 
 
