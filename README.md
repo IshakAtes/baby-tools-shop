@@ -26,7 +26,7 @@ docker run -d --env-file .env -p 8025:8025 baby-tools-shop
 ```
 
 4. Access the application:
-Visit `http://localhost:8025` in your browser.
+Visit `http://<SECRET_IP_ADRESS>:8025` in your browser.
 
 5. Create a Django Admin User (Optional):
 ``` bash
@@ -44,18 +44,15 @@ python manage.py createsuperuser
 2. [Technologies](#technologies-)  
 3. [Hints](#hints)  
 4. [Photos](#photos-️)  
-5. [Setup Instructions](#setup-instructions-)  
-   - [Step 1: Create Dockerfile](#step-1-create-dockerfile-)  
-   - [Step 2: Configure Django Allowed Hosts](#step-2-open-the-settingspy-in-babyshop_app-and-add-this-to-allowed-host)  
-   - [Step 3: Connect with the Server](#step-3-connect-with-the-server)  
-   - [Step 4: Install Git on the Server](#step-4-install-git-on-the-server-if-not-available)  
-   - [Step 5: Clone Repository on Server](#step-5-clone-repository)  
-   - [Step 6: Create the .env File](#step-6-this-command-creates-a-env-file-and-writes-the-server_ip-environment-variable-with-the-value-secret_ip_adress-this-file-is-used-to-store-configuration-values-securely-outside-the-source-code-here-is-an-example)  
-   - [Step 7: Create Docker Image](#step-7-create-and-run-a-docker-image-)  
-   - [Step 8: Start Docker Container](#step-8-start-docker-container-)  
-   - [Step 9: Test Application](#step-9-checking-the-application)  
-   - [Step 10: Create Django Admin User](#step-10-create-a-superuser-admin)  
-   - [Step 11: Add Products](#step-11-after-you-have-logged-in-you-can-add-some-products-to-avoid-seeing-a-blank-page-after-publication-and-to-check-if-it-worked)   
+5. [Usage](#usage-section-)
+   - [Step 1: Clone Repository on Server](#step-1-clone-repository)
+   - [Step 2: Configure Django Allowed Hosts](#step-2-open-the-settingspy-in-babyshop_app-and-add-this-to-allowed-host)
+   - [Step 3: Create the .env File](#step-3-this-command-creates-a-env-file-and-writes-the-server_ip-environment-variable-with-the-value-secret_ip_adress-this-file-is-used-to-store-configuration-values-securely-outside-the-source-code-here-is-an-example)  
+   - [Step 4: Create Docker Image](#step-4-create-and-run-a-docker-image-)  
+   - [Step 5: Start Docker Container](#step-5-start-docker-container-)  
+   - [Step 6: Test Application](#step-6-checking-the-application)  
+   - [Step 7: Create Django Admin User](#step-7-create-a-superuser-admin)  
+   - [Step 8: Add Products](#step-8-after-you-have-logged-in-you-can-add-some-products-to-avoid-seeing-a-blank-page-after-publication-and-to-check-if-it-worked)   
 5. [Project Structure](#-project-structure)  
 6. [Configuration and Important Rules](#️-configuration-and-important-rules)  
 7. [License](#-license)  
@@ -69,7 +66,7 @@ python manage.py createsuperuser
 
 - **Python 3.9**  
 - **Django 4.0.2**  
-- **Venv**  
+- **Git**  
 - **Docker**  
 
 ---
@@ -103,42 +100,14 @@ python manage.py createsuperuser
 
 ---
 
-## Setup Instructions 🚀
+## Usage Section 🚀
 
-### Step 1: Create Dockerfile 🐳
-
-``` bash
-# 1. Starte mit einem Base-Image
-FROM python:3.9-slim
-
-# 2. Setze das Arbeitsverzeichnis im Container
-WORKDIR /app
-
-# 3. Kopiere notwendige Projektdateien und Abhängigkeiten in den Container
-COPY requirements.txt /app/
-COPY ./babyshop_app /app
-
-# 4. Installiere python-dotenv, um .env-Dateien zu laden (falls du es benötigst)
-RUN pip install python-dotenv
-
-# 5. Installiere alle Abhängigkeiten
-RUN pip install -r requirements.txt
-
-# 6. Sammle die statischen Dateien
-# RUN python manage.py collectstatic --noinput
-
-# 7. Exponiere den Port, auf dem die Anwendung läuft
-EXPOSE 8025
-
-# Variable mit der ip
-ENV SERVER_IP=localhost
-
-# 8. Starte die Anwendung
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8025"]
+### Step 1: Clone repository
+Change to the desired directory on the server and clone your Git repository:
+```bash
+git clone https://github.com/IshakAtes/baby-tools-shop.git
+cd baby-tools-shop
 ```
-> [!Note]
-> The file should be located as a 'Dockerfile' in the main project folder.
-
 
 
 ### Step 2: Open the settings.py in babyshop_app and add this to allowed host:
@@ -151,40 +120,14 @@ ALLOWED_HOSTS = [os.getenv("SERVER_IP", 'localhost')]
 ```
 
 
-### Step 3: Connect with the server
-Connect to your server using `SSH`:
-``` bash
-ssh -i ~/.ssh/ssh-key username@ip-adress
-```
-
-
-### Step 4: Install Git on the server (if not available)
-```bash
-sudo apt update  
-sudo apt install git -y
-```
-
-
-### Step 5: Clone repository
-Change to the desired directory on the server and clone your Git repository:
-```bash
-git clone https://github.com/UserName/baby-tools-shop.git
-cd baby-tools-shop
-```
-
-``` bash
-cd baby-tools-shop
-```
-
-
-### Step 6: This command creates a `.env` file and writes the `SERVER_IP` environment variable with the value `<SECRET_IP_ADRESS`. This file is used to store configuration values securely outside the source code. Here is an [example](https://github.com/IshakAtes/baby-tools-shop/blob/main/.envExample)
+### Step 3: This command creates a `.env` file and writes the `SERVER_IP` environment variable with the value `<SECRET_IP_ADRESS`. This file is used to store configuration values securely outside the source code. Here is an [example](https://github.com/IshakAtes/baby-tools-shop/blob/main/.envExample)
 ``` bash
 echo "SERVER_IP=<SECRET_IP_ADRESS>" > .env
 ```
 
 
 
-### Step 7: Create and run a Docker image 🐳
+### Step 4: Create and run a Docker image 🐳
 Creates a Docker image with the tag `baby-tools-shop` based on the Dockerfile in the current directory (.)
 - docker build: The command to create (build) a Docker image.
 - -t baby-tools-shop: Specifies the name (baby-tools-shop) and optionally a tag (version number) for the image. The -t stands for “tag”.
@@ -195,20 +138,25 @@ docker build -t baby-tools-shop .
 
 
 
-### Step 8: Start Docker container 🐳
-The command docker run -d --env-file .env -p 8025:8025 baby-tools-shop is used to start a Docker container. Here's a breakdown of each part:
+### Step 5: Start Docker container 🐳
+The command `docker run -d --env-file .env -p 8025:8025 --restart=always baby-tools-shop` is used to start a Docker container. Here's a breakdown of each part:
 - `docker run`: Starts a new container based on a Docker image.
 - `-d`: Runs the container in detached mode (in the background), so your terminal stays free.
 - `--env-file .env`: Loads environment variables from the `.env` file into the container.
 - `-p 8025:8025`: Maps port 8025 on your machine to port 8025 inside the container, making the service available at `http://localhost:8025`.
+- `--restart=always`: Ensures that the container automatically restarts in the following cases:
+  - If the container crashes, it is restarted immediately.
+  - If the Docker service restarts, the container is started again.
+  - If the server/machine reboots, the container starts automatically with the system.
+  - **Exception:** If the container is manually stopped using `docker stop <container-id>`, it will not restart until manually started again.
 - `baby-tools-shop`: The name of the Docker image used to create the container.
 ``` bash
-docker run -d --env-file .env -p 8025:8025 baby-tools-shop
+docker run -d --env-file .env -p 8025:8025 --restart=always baby-tools-shop
 ```
 
 
 
-### Step 9: Checking the application
+### Step 6: Checking the application
 Call the server `IP` with port `8025` in the browser:
 ``` bash
 http://<ip_adress>:8025/
@@ -216,7 +164,7 @@ http://<ip_adress>:8025/
 
 
 
-### Step 10: Create a superuser 'Admin'
+### Step 7: Create a superuser 'Admin'
 1. Find out the container ID
 ``` bash
 docker ps
@@ -251,7 +199,7 @@ http://ip_adress:8025/admin
 
 
 
-### Step 11: After you have logged in, you can add some products to avoid seeing a blank page after publication. And to check if it worked.
+### Step 8: After you have logged in, you can add some products to avoid seeing a blank page after publication. And to check if it worked.
 
 
 
@@ -277,9 +225,6 @@ baby-tools-shop/
 - `Dockerfile`: Docker configuration
 
 #### Important Points
-
-- **Isolation:** The virtual environment (`venv`) separates project dependencies from the system Python.
-
 - **Containerization**: The Docker image makes the application portable and consistent across all environments.
 
 - **Port Configuration:** The specification `0.0.0.0:8025` and Docker port mapping are crucial for external access.
