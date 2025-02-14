@@ -105,7 +105,7 @@ python manage.py createsuperuser
 ### Step 1: Clone repository
 Change to the desired directory on the server and clone your Git repository:
 ```bash
-git clone https://github.com/UserName/baby-tools-shop.git
+git clone https://github.com/IshakAtes/baby-tools-shop.git
 cd baby-tools-shop
 ```
 
