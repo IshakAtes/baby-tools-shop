@@ -29,21 +29,11 @@ DEBUG = True
 
 from dotenv import load_dotenv
 import os
-import environ
 load_dotenv()
 
-env = environ.Env()
-# reading env file
-environ.Env.read_env()
 # BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-IP = env("SERVER_IP", default="localhost")
-
-ALLOWED_HOSTS = [
-    os.getenv(
-        IP,
-        "127.0.0.1"),
-]
+ALLOWED_HOSTS = [os.getenv("SERVER_IP", 'localhost')]
 
 
 
